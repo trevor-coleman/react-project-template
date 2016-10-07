@@ -7,14 +7,24 @@ import AddChore from '../containers/AddChore'
 // eslint-disable-next-line no-unused-vars
 import VisibleChoreList from '../containers/VisibleChoreList.jsx'
 
+import {Grid, Col, Row} from 'react-bootstrap'
 
+var divStyle={
+  marginTop:'100px'
+}
 
 const App = () => (
-  <div>
-    <AddChore />
-    <VisibleChoreList />
-    <Footer />
-  </div>
+    <div style={divStyle}>
+        <Grid>
+            <Row>
+                <Col>
+                    <AddChore/>
+                    <VisibleChoreList/>
+                    <Footer/>
+                </Col>
+            </Row>
+        </Grid>
+    </div>
 )
 
 export default App
