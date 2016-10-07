@@ -1,18 +1,21 @@
+// eslint-disable-next-line
 import React from 'react'
+// eslint-disable-next-line
 import {render} from 'react-dom'
-import ThisComponent from './components/ThisComponent'
+// eslint-disable-next-line
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+// eslint-disable-next-line
+import choresApp from './reducers'
+// eslint-disable-next-line
+import App from "./components/App"
 
-class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>Hello React Whats Up</p>
-                <ThisComponent/>
-            </div>
-        )
 
-    }
-}
+let store = createStore(choresApp)
 
 render(
-    <App/>, document.getElementById('app'))
+  <Provider store={store}>
+    <App />
+    </Provider>,
+    document.getElementById('root')
+)
