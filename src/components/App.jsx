@@ -9,22 +9,22 @@ import VisibleChoreList from '../containers/VisibleChoreList.jsx'
 
 import {Grid, Col, Row} from 'react-bootstrap'
 
-var divStyle={
-  marginTop:'100px'
+var divStyle = {
+  marginTop: '100px'
 }
 
 const App = () => (
-    <div style={divStyle}>
-        <Grid>
-            <Row>
-                <Col>
-                    <AddChore/>
-                    <VisibleChoreList/>
-                    <Footer/>
-                </Col>
-            </Row>
-        </Grid>
-    </div>
+  <div style={divStyle}>
+    <Grid>
+      <Row>
+        <Col>
+          <AddChore/>
+          <VisibleChoreList/>
+          <Footer/>
+        </Col>
+      </Row>
+    </Grid>
+  </div>
 )
 
 export default App
