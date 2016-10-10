@@ -14,6 +14,14 @@ const ChoreList = ({chores, onChoreClick}) => {
   )
 }
 
+ChoreList.propTypes = {
+  chores: PropTypes.shape({
+    isFetching: PropTypes.isRequired,
+    didInvalidate: PropTypes.bool.isRequired,
+    chores: PropTypes.arrayOf(PropTypes.shape({description: PropTypes.string.isRequired, key: PropTypes.string.isRequired}))
+  })
+}
+
 // ChoreList.propTypes = {
 //   chores: PropTypes.(PropTypes.shape({
 //     id: PropTypes.number.isRequired,
