@@ -14,15 +14,13 @@ const getVisibleChores = (chores, filter) => {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    chores: getVisibleChores(state.chores, state.visibiltyFilter)
-  }
+  return getVisibleChores(state.chores, state.visibiltyFilter)
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChoreClick: (id) => {
-      dispatch(toggleChore(id))
+    onChoreClick: (key, complete) => {
+      dispatch(toggleChore(key, complete))
     }
   }
 }

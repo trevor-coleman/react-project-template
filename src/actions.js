@@ -29,9 +29,24 @@ var config = {
 
 const Chores = firebase.initializeApp(config);
 
-const ChoresRef = Chores
+export const ChoresRef = Chores
   .database()
   .ref("chores")
+
+export const ChoreRefByKey = (key) => {
+  return Chores
+    .database()
+    .ref("chores/" + key)
+}
+//FIREBASE INITIALIZER
+//eslint-disable-next-line no-unused-vars
+var pushABunchOfChores = () => {
+  ChoresRef.push({description: "Wipe the Counters", complete: false})
+  ChoresRef.push({description: "Take out the Garbage", complete: false})
+  ChoresRef.push({description: "File Loose Papers", complete: false})
+  ChoresRef.push({description: "Sweep and Mop", complete: false})
+}
+// pushABunchOfChores()
 
 //ACTION CREATORS
 
@@ -64,9 +79,13 @@ export const addChore = (text) => {
   })
 }
 
-export const toggleChore = (index) => {
-  console.log("toggleChore")
-  return {type: TOGGLE_CHORE, index}
+export const toggleChore = (chore) => {
+  return function(dispatch) {
+    ChoreRefByKey(chore.key).set({
+      ...chore,
+      complete: !chore.complete
+    });
+  }
 }
 
 export const setVisibilityFilter = (filter) => {

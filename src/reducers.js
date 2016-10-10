@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import {
+  ChoreRefByKey,
   ADD_CHORE,
   TOGGLE_CHORE,
   SET_VISIBILITY_FILTER,
@@ -8,6 +9,7 @@ import {
   VisibilityFilters
 } from './actions'
 const {SHOW_ALL} = VisibilityFilters
+import * as TC from "./tc.js"
 
 function visibiltyFilter(state = SHOW_ALL, action) {
   // console.log("VF: ", state, action)
@@ -37,21 +39,7 @@ function chores(state = {
         ]
       }
 
-    case TOGGLE_CHORE:
-      console.log(state);
-      return {
-        ...state,
-        chores: state
-          .chores
-          .map((chore, index) => {
-            if (index === action.index) {
-              return Object.assign({}, chore, {
-                completed: !chore.completed
-              })
-            }
-            return chore
-          })
-      }
+      // case TOGGLE_CHORE:
 
     case REQUEST_CHORES:
       return Object.assign({}, state, {
@@ -60,7 +48,7 @@ function chores(state = {
       })
 
     case RECEIVE_CHORES:
-      console.log(action)
+      console.log("RECIEVE CHORES", action)
       var choresArray = []
       for (var key in action.chores) {
         // console.log(key, action.chores[key], action.chores[key].hasOwnProperty(key))
@@ -69,7 +57,12 @@ function chores(state = {
         //   continue;
         // }
 
-        choresArray.push({description: action.chores[key], key: key})
+        var newChore = {
+          ...action.chores[key],
+          key: key
+        }
+
+        choresArray.push(newChore)
       }
       console.log(choresArray);
       return Object.assign({}, state, {
