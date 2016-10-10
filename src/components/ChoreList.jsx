@@ -1,18 +1,18 @@
-// eslint-disable-next-line no-unused-vars
 import React, {PropTypes} from 'react'
-// eslint-disable-next-line no-unused-vars
 import Chore from './Chore'
 
-const ChoreList = ({chores, onChoreClick}) => {
-  console.log("ChoreList -  Chores", chores)
-  return (
-    <ul>
-      {chores
-        .chores
-        .map(chore => <Chore key={chore.key} chore={chore} onClick={() => onChoreClick(chore.key)}/>)}
-    </ul>
-  )
-}
+const ChoreList = React.createClass({
+  render() {
+    return (
+      <ul>
+        {chores
+          .chores
+          .map(chore => <Chore key={chore.key} chore={chore} onClick={() => onChoreClick(chore.key)}/>)}
+      </ul>
+
+    )
+  }
+})
 
 ChoreList.propTypes = {
   chores: PropTypes.shape({

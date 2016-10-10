@@ -1,6 +1,12 @@
 {
-  "parser": "babel-eslint",
-    "rules": {
-        "no-unused-vars": 1
-    }
+		"parser": "babel-eslint",
+		"rules": {
+    "strict": 0
+  },
+		"plugins": [
+    "react"
+  ], "rules": {
+			"no-unused-vars": 1,
+			"react/jsx-uses-vars": 2
+	}
 }
