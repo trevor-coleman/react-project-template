@@ -9,7 +9,6 @@ import {
   VisibilityFilters
 } from './actions'
 const {SHOW_ALL} = VisibilityFilters
-import * as TC from "./tc.js"
 
 function visibiltyFilter(state = SHOW_ALL, action) {
   // console.log("VF: ", state, action)
@@ -42,10 +41,11 @@ function chores(state = {
       // case TOGGLE_CHORE:
 
     case REQUEST_CHORES:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true,
-        didInvalidate: false
-      })
+        didInvalidate: true
+      }
 
     case RECEIVE_CHORES:
       console.log("RECIEVE CHORES", action)
