@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk'
 import choresApp from './reducers'
 // eslint-disable-next-line
 import App from "./components/App"
-import {fetchChores} from './actions'
+import {fetchChores, fetchUsers} from './actions'
 
 // let store = createStore(choresApp, applyMiddleware(thunkMiddleware))
 
@@ -18,8 +18,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(choresApp, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 store.dispatch(fetchChores())
+store.dispatch(fetchUsers())
 
 render(
-  <Provider store={store}>
-  <App/>
+    <Provider store={store}>
+    <App/>
 </Provider>, document.getElementById('root'))

@@ -2,24 +2,23 @@ import React, {PropTypes} from 'react'
 import Chore from './Chore'
 
 const ChoreList = React.createClass({
-  render() {
-    console.log("ClientList Props", this.props)
-    return (
-      <ul>
-        {this
-          .props
-          .chores
-          .map(chore => <Chore key={chore.key} chore={chore} onClick={() => this.props.onChoreClick(chore)}/>)}
-      </ul>
+    render() {
+        return (
+            <ul>
+                {this
+                    .props
+                    .chores
+                    .map(chore => <Chore key={chore.key} chore={chore} onClick={() => this.props.onChoreClick(chore)}/>)}
+            </ul>
 
-    )
-  }
+        )
+    }
 })
 
 ChoreList.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  didInvalidate: PropTypes.bool.isRequired,
-  chores: PropTypes.arrayOf(PropTypes.shape({description: PropTypes.string.isRequired, key: PropTypes.string.isRequired}))
+    // isFetching: PropTypes.bool.isRequired,
+    // didInvalidate: PropTypes.bool.isRequired,
+    chores: PropTypes.arrayOf(PropTypes.shape({description: PropTypes.string.isRequired, key: PropTypes.string.isRequired}))
 }
 
 // ChoreList.propTypes = {

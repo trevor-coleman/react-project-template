@@ -1,81 +1,87 @@
 import {combineReducers} from 'redux'
 import {
-  ChoreRefByKey,
-  ADD_CHORE,
-  TOGGLE_CHORE,
-  SET_VISIBILITY_FILTER,
-  REQUEST_CHORES,
-  RECEIVE_CHORES,
-  VisibilityFilters
+    ChoreRefByKey,
+    ADD_CHORE,
+    TOGGLE_CHORE,
+    SET_VISIBILITY_FILTER,
+    REQUEST_CHORES,
+    RECEIVE_CHORES,
+    RECEIVE_USERS,
+    VisibilityFilters
 } from './actions'
 const {SHOW_ALL} = VisibilityFilters
 
 function visibiltyFilter(state = SHOW_ALL, action) {
-  // console.log("VF: ", state, action)
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return action.filter
-    default:
-      return state
-  }
+    switch (action.type) {
+        case SET_VISIBILITY_FILTER:
+            return action.filter
+        default:
+            return state
+    }
 }
 
-function chores(state = {
-  isFetching: false,
-  didInvalidate: false,
-  chores: []
-}, action) {
-  switch (action.type) {
-    case ADD_CHORE:
-      return {
-        ...state,
-        chores: [
-          ...state.chores, {
-            text: action.text,
-            id: action.id,
-            completed: false
-          }
-        ]
-      }
+function users(state = [], action) {
+    switch (action.type) {
+        case RECEIVE_USERS:
+            var newUsersState = []
+            for (var key in action.users) {
+                var newUser = {
+                    ...action.users[key],
+                    key: key
+                }
+                newUsersState.push(newUser)
 
-      // case TOGGLE_CHORE:
+            }
+            return newUsersState
 
-    case REQUEST_CHORES:
-      return {
-        ...state,
-        isFetching: true,
-        didInvalidate: true
-      }
+        default:
+            return state
+    }
 
-    case RECEIVE_CHORES:
-      console.log("RECIEVE CHORES", action)
-      var choresArray = []
-      for (var key in action.chores) {
-        // console.log(key, action.chores[key], action.chores[key].hasOwnProperty(key))
-        // if (!action.chores[key].hasOwnProperty(key)) {
-        //   console.log(action.chores[key])
-        //   continue;
-        // }
-
-        var newChore = {
-          ...action.chores[key],
-          key: key
-        }
-
-        choresArray.push(newChore)
-      }
-      console.log(choresArray);
-      return Object.assign({}, state, {
-        isFetching: false,
-        didInvalidate: false,
-        chores: choresArray
-      })
-
-    default:
-      return state
-  }
 }
 
-const choresApp = combineReducers({visibiltyFilter, chores})
+function chores(state = [], action) {
+    switch (action.type) {
+        case ADD_CHORE:
+            return {
+                ...state,
+                chores: [
+                    ...state.chores, {
+                        text: action.text,
+                        id: action.id,
+                        completed: false
+                    }
+                ]
+            }
+
+            // case TOGGLE_CHORE:
+
+        case REQUEST_CHORES:
+            return {
+                ...state,
+                isFetching: true,
+                didInvalidate: true
+            }
+
+        case RECEIVE_CHORES:
+            var choresArray = []
+            for (var key in action.chores) {
+
+                var newChore = {
+                    ...action.chores[key],
+                    key: key
+                }
+
+                choresArray.push(newChore)
+            }
+
+            return choresArray
+
+        default:
+            return state
+    }
+}
+
+const choresApp = combineReducers({visibiltyFilter, chores, users})
 
 export default choresApp
