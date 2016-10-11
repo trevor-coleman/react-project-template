@@ -19,8 +19,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChoreClick: (key, complete) => {
-      dispatch(toggleChore(key, complete))
+    onChoreClick: (chore) => {
+      dispatch(toggleChore(chore))
     }
   }
 }

@@ -59,6 +59,7 @@ export const receiveChores = (chores) => {
 }
 
 export const fetchChores = () => {
+  dispatch(requestChores())
   return function(dispatch) {
     console.log("fetchChores")
     ChoresRef.on('value', snapshot => {
